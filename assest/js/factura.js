@@ -1,10 +1,10 @@
-function MNuevoUsuario(){
+function MNuevoFactura(){
     $("#modal-warning").modal("show");
 
     var obj=""
     $.ajax({
         type:"POST",
-        url:"vista/usuario/FNuevoUsuario.php",
+        url:"vista/factura/FNuevoFactura.php",
         data:obj,
         success:function(data){
             $("#content-warning").html(data)
@@ -12,13 +12,11 @@ function MNuevoUsuario(){
     })
 }
 
-function regUsuario() {
-    var formData=new FormData($("#FRegUsuario")[0])
-
-    if(formData.get("password")==formData.get("vrPassword")){
+function regFactura() {
+    var formData=new FormData($("#FRegFactura")[0])
         $.ajax({
             type:"POST",
-            url:"controlador/usuarioControlador.php?ctrRegUsuario",
+            url:"controlador/facturaControlador.php?ctrRegFactura",
             data:formData,
             cache:false,
             contentType:false,
@@ -31,7 +29,7 @@ function regUsuario() {
                     Swal.fire({
                         icon:"success",
                         showConfirmButton:false,
-                        title:"El usuario a sido registrado",
+                        title:"La factura a sido registrado",
                         timer:1000
                     })
                     setTimeout(function() {
@@ -48,16 +46,15 @@ function regUsuario() {
 
             }
         })
-    }
 }
 
-function MEditUsuario(id) {
+function MEditFactura(id) {
     $("#modal-warning").modal("show");
 
     var obj=""
     $.ajax({
         type:"POST",
-        url:"vista/usuario/FEditUsuario.php?id="+id,
+        url:"vista/factura/FEditFactura.php?id="+id,
         data:obj,
         success:function(data){
             $("#content-warning").html(data)
@@ -65,13 +62,13 @@ function MEditUsuario(id) {
     })
 }
 
-function editUsuario() {
-    var formData=new FormData($("#FEditUsuario")[0])
+function editFactura() {
+    var formData=new FormData($("#FEditFactura")[0])
 
     if(formData.get("password")==formData.get("vrPassword")){
         $.ajax({
             type:"POST",
-            url:"controlador/usuarioControlador.php?ctrEditUsuario",
+            url:"controlador/facturaControlador.php?ctrEditFactura",
             data:formData,
             cache:false,
             contentType:false,
@@ -84,7 +81,7 @@ function editUsuario() {
                     Swal.fire({
                         icon:"success",
                         showConfirmButton:false,
-                        title:"El usuario ha sido ACTUALIZADO",
+                        title:"El factura ha sido ACTUALIZADO",
                         timer:1000
                     })
                     setTimeout(function() {
@@ -104,7 +101,7 @@ function editUsuario() {
     }
 }
 
-function MEliUsuario(id){
+function MEliFactura(id){
     var obj={
         id:id
     }
@@ -118,7 +115,7 @@ function MEliUsuario(id){
         if(result.isConfirmed){
             $.ajax({
                 type:"POST",
-                url:"controlador/usuarioControlador.php?ctrEliUsuario",
+                url:"controlador/facturaControlador.php?ctrEliFactura",
                 data:obj,
                 success:function(data){
                     if(data=="ok"){

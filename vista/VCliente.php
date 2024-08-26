@@ -16,7 +16,7 @@
 
       <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Lista de Clientes Registrados</h3>
+                <h3 class="card-title">Lista de <b>CLIENTES</b> Registrados</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -24,12 +24,12 @@
                   <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Login</th>
-                    <th>Perfil</th>
-                    <th>Estado</th>
-                    <th>Ultimo acceso</th>
-                    <th>Fecha de registro</th>
-                    <th>Fecha de registro</th>
+                    <th>Razon Social</th>
+                    <th>NIT CI</th>
+                    <th>Direccion</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
                     <td>
                       <button class="btn btn-primary" onclick="MNuevoCliente()">Nuevo</button>
                     </td>

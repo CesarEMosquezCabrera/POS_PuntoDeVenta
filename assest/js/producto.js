@@ -1,3 +1,5 @@
+
+
 function MNuevoProducto(){
     $("#modal-warning").modal("show");
 
@@ -23,7 +25,7 @@ function regProducto() {
             processData:false,
             success:function(data){
 
-                // console.log(data)
+                //console.log(data)
                 
                 if(data="ok"){
                     Swal.fire({
@@ -65,7 +67,6 @@ function MEditProducto(id) {
 function editProducto() {
     var formData=new FormData($("#FEditProducto")[0])
 
-    if(formData.get("password")==formData.get("vrPassword")){
         $.ajax({
             type:"POST",
             url:"controlador/productoControlador.php?ctrEditProducto",
@@ -85,7 +86,7 @@ function editProducto() {
                         timer:1000
                     })
                     setTimeout(function() {
-                        location.reload()
+                        // location.reload()
                     },1200)
                 }else{
                     Swal.fire({
@@ -98,7 +99,6 @@ function editProducto() {
 
             }
         })
-    }
 }
 
 function MEliProducto(id){
@@ -133,4 +133,94 @@ function MEliProducto(id){
             })
         }
     })
+}
+
+function previsualizar() {
+    console.log("sss");
+    let imagen=document.getElementById("imgProducto").files[0]
+    if (imagen["type"]!="image/png" && imagen["type"]!="image/jpeg") {
+        $("#imgProducto").val("") 
+        Swal.fire({
+            icon:'error',
+            showConfirmButton:false,
+            tittle:"El archivo no es PNG o JPEG",
+        })
+    }else if(imagen["size"]>10000000){
+        $("#imgProducto").val("")
+        Swal.fire({
+            icon:'error',
+            showConfirmButton:false,
+            tittle:"El archivo es mayor a 10MB",
+        })
+    }else{
+        let datosImagen=new FileReader
+        datosImagen.readAsDataURL(imagen)
+        $(datosImagen).on("load",function(event){
+            let rutaImagen=event.target.result
+            $(".previsualizar").attr("src",rutaImagen)
+        })
+    }
+}
+
+function SinCatalogo(){
+    var obj={
+        // nit: 338794023
+        // cuis: 9272DC05
+        codigoAmbiente:2,
+        codigoPuntoVenta: 0,
+        codigoPuntoVentaSpecified: true,
+        codigoSistema: "775FA42BE90F7B78EF98F57",
+        cuis: "9272DC05",
+        nit: 338794023
+    }
+    console.log("Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1");
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/Sincronizacion/listaproductosservicios?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w",
+        data: JSON.stringify(obj),
+        cache: false,
+        contentType: "application/json",
+        success: function(data){
+            console.log("Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2");
+            console.log(data)
+
+            for (var i = 0; i < data["listaCodigos"].length; i++) {
+                $("#CatProductos").append("<tr><td>"+data["listaCodigos"][i]["codigoActividad"]+"</td><td>"+data["listaCodigos"][i]["codigoProducto"]+"</td><td>"+data["listaCodigos"][i]["descripcionProducto"]+"</td><td></td></tr>")
+            }
+        }
+    })
+}
+function unidadesMedida(){
+    var obj={
+        codigoAmbiente:2,
+        codigoPuntoVenta: 0,
+        codigoPuntoVentaSpecified: true,
+        codigoSistema: "775FA42BE90F7B78EF98F57",
+        cuis: "9272DC05",
+        nit: 338794023
+    }
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/Sincronizacion/unidadmedida?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w",
+        data: JSON.stringify(obj),
+        cache: false,
+        contentType: "application/json",
+        success: function(data){
+            console.log(data)
+        }
+    })
+}
+
+function MVerProducto(id) {
+    $("#modal-warning").modal("show");
+
+    var obj=""
+    $.ajax({
+        type:"POST",
+        url:"vista/producto/MVerProducto.php?id="+id,
+        data:obj,
+        success:function(data){
+            $("#content-warning").html(data)
+        }
+    })  
 }

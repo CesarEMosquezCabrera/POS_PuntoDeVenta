@@ -23,13 +23,11 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>Codigo</th>
-                    <th>Nombre</th>
+                    <th>Cod. Producto</th>
+                    <th>Descripcion</th>
                     <th>Precio</th>
-                    <th>Unidad</th>
                     <th>Imagen</th>
-                    <th>Disponible</th>
+                    <th>Disponibilidad</th>
                     <td>
                       <button class="btn btn-primary" onclick="MNuevoProducto()">Nuevo</button>
                     </td>
@@ -43,12 +41,22 @@
                     foreach($producto as $value){
                       ?>
                       <tr>
-                        <td><?php echo $value["id_producto"]; ?></td>
                         <td><?php echo $value["cod_producto"]; ?></td>
                         <td><?php echo $value["nombre_producto"]; ?></td>                        
                         <td><?php echo $value["precio_producto"]; ?></td>
-                        <td><?php echo $value["unidad_medida"]; ?></td>
-                        <td><?php echo $value["imagen_producto"]; ?></td>
+                        <td>
+                          <?php 
+                          if ($value["imagen_producto"]=="" || !preg_match("/\.(png|jpe?g)$/i", $value["imagen_producto"])){
+                          ?>
+                          <img src="assest/dist/img/product_default.png" width=50px height=auto alt="Imagenes">
+                          <?php 
+                          }else{
+                          ?>
+                          <img src="assest/dist/img/productos/<?php echo $value["imagen_producto"]; ?>" width=50px height=auto alt="Imagenes">
+                          <?php 
+                          }
+                          ?>
+                        </td>
                         <td>
                           <?php
                           if($value["disponible"]==1){?>
@@ -63,6 +71,9 @@
                         </td>
                         <td>
                           <div class="btn-group">
+                          <button class="btn btn-info" onclick="MVerProducto(<?php echo $value["id_producto"]; ?>)">
+                              <i class="fas fa-eye"></i>
+                            </button>
                             <button class="btn btn-secundary" onclick="MEditProducto(<?php echo $value["id_producto"]; ?>)">
                               <i class="fas fa-edit"></i>
                             </button>

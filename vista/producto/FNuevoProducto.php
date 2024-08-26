@@ -5,32 +5,74 @@
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body row">
+    <div class="modal-body">
+      
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="exampleInputBorder">Codigo Producto</label>
+            <input type="text" class="form-control form-control-border" placeholder="" name="codigo" id="codigo">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="exampleInputBorder">Codigo Producto SIN</label>
+            <input type="text" class="form-control form-control-border" placeholder="" name="codigoSIN" id="codigoSIN">
+          </div>
+        </div>
+      </div>
 
-    <div class="form-group col-sm-6">
-        <label for="exampleInputBorder">Codigo Producto</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="codigo" id="codigo">
-    </div>
-    <div class="form-group col-sm-6">
-        <label for="exampleInputBorder">Nombre Producto</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="nombre" id="nombre">
-    </div>
-    <div class="form-group col-sm-6">
-        <label for="exampleInputBorder">Precio Producto</label>
-        <input type="number" class="form-control form-control-border" placeholder="" name="precio" id="precio">
-    </div>
-    <div class="form-group col-sm-6">
-        <label for="exampleInputBorder">Unidad Medida</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="unidad" id="unidad">
-    </div>
-    <div class="form-group col-sm-6">
-        <label for="exampleInputBorder">Imagen Producto</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="imagen" id="imagen">
-    </div>
-    <!-- <div class="form-group">
-        <label for="exampleInputBorder">Disponible</label>
-        <input type="text" class="form-control form-control-border" placeholder="" name="login" id="login">
-    </div> -->
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="exampleInputBorder">Descripcion Producto</label>
+            <input type="text" class="form-control form-control-border" placeholder="" name="nombre" id="nombre">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="exampleInputBorder">Precio Producto</label>
+            <input type="number" class="form-control form-control-border" placeholder="" name="precio" id="precio">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="exampleInputBorder">Unidad Medida</label>
+            <input type="text" class="form-control form-control-border" placeholder="" name="unidad" id="unidad">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="exampleInputBorder">Unidad Medida SIN</label>
+            <input type="text" class="form-control form-control-border" placeholder="" name="unidadSIN" id="unidadSIN">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Imagen Producto <span class="text-muted">(Peso max. 10MB-JPG,PNG)</span></label>
+            <div class="input-group">
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="imgProducto" name="imgProducto" onchange="previsualizar()">
+                <label class="custom-file-label" for="imgProducto">Elegir Archivo</label>
+              </div>
+              <div class="input-group-append">
+                <span class="input-group-text">Subir</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" style="text-align:center;">
+            <img src="assest/dist/img/product_default.png" alt="" width="150" class="img-thumbnail previsualizar">
+          </div>
+        </div>
+      </div>     
 
     </div>
     <div class="modal-footer justify-content-between">
@@ -52,6 +94,10 @@ $(function () {
         required: true,
         minlength: 1,
       },
+      codigoSIN: {
+        required: true,
+        minlength: 1,
+      },
       nombre: {
         required: true,
         minlength: 1,
@@ -64,9 +110,10 @@ $(function () {
         required: true,
         minlength: 1,
       },
-      imagen: {
+      unidadSIN: {
         required: true,
         minlength: 1,
+        number: true
       },
     },
     errorElement: 'span',

@@ -73,12 +73,20 @@ class ControladorProducto{
     }
     static public function ctrRegProducto(){
         require "../modelo/productoModelo.php";
+
+        $imagen=$_FILES["imgProducto"];
+        $imgNombre=$imagen["name"];
+        $imgTmp=$imagen["tmp_name"];
+        move_uploaded_file($imgTmp,"../assest/dist/img/productos/".$imgNombre);
         $data=array(
             "codigoProducto"=>$_POST["codigo"],
             "nombreProducto"=>$_POST["nombre"],
             "precioProducto"=>$_POST["precio"],
             "unidadProducto"=>$_POST["unidad"],
-            "imagenProducto"=>$_POST["imagen"]
+            "unidadSINProducto"=>$_POST["unidadSIN"],
+            "codigoSINProducto"=>$_POST["codigoSIN"],
+            "imagenProducto"=>$imgNombre,
+            //$_FILES["imagen"]["name"]
         );
         $respuesta=ModeloProducto::mdlRegProducto($data);
         echo $respuesta;
@@ -90,14 +98,25 @@ class ControladorProducto{
     static public function ctrEditProducto(){
         require "../modelo/productoModelo.php";
 
+        $imagen=$_FILES["imgProducto"];
+        if($imgNombre=$imagen["name"]==""){
+            $imgNombre=$_POST["imgActual"]=="";
+        }else{
+            $imgNombre=$imagen["name"];
+            $imgTmp=$imagen["tmp_name"];
+            move_uploaded_file($imgTmp,"../assest/dist/img/productos/".$imgNombre);
+        }
+        
         $data=array(
-            "idProducto"=>$_POST["idProducto"],
-            "codigoProducto"=>$_POST["codigo"],
+            "idProducto"=>$_POST["idproducto"],
             "nombreProducto"=>$_POST["nombre"],
             "precioProducto"=>$_POST["precio"],
             "unidadProducto"=>$_POST["unidad"],
-            "imagenProducto"=>$_POST["imagen"],
-            "disponibleProducto"=>$_POST["disponible"]
+            "unidadSINProducto"=>$_POST["unidadSIN"],
+            "codigoSINProducto"=>$_POST["codigoSIN"],
+            "disponibleProducto"=>$_POST["disponible"],
+            "imagenProducto"=>$imgNombre,
+            //$_FILES["imagen"]["name"]
         );
         ModeloProducto::mdlEditProducto($data);
         $respuesta=ModeloProducto::mdlEditProducto($data);

@@ -16,7 +16,7 @@
 
       <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Lista de usuarios Registrados</h3>
+                <h3 class="card-title">Lista de <b>USUARIOS</b> Registrados</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

@@ -76,7 +76,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link ">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-hands-helping"></i>
               <p>
                 Clientes
                 <i class="right fas fa-angle-left"></i>
@@ -107,6 +107,14 @@
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="SinCatalogos" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sincronizacion de Catalogos SIN</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link ">
@@ -118,7 +126,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="VUsuario" class="nav-link">
+                <a href="VFactura" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Emitir Factura</p>
                 </a>

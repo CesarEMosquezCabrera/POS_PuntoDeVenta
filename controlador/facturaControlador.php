@@ -3,94 +3,48 @@
     // var_dump($ruta);
 
     if(isset($ruta["query"])){
-        if($ruta["query"]=="ctrRegUsuario" || $ruta["query"]=="ctrEditUsuario" || $ruta["query"]=="ctrEliUsuario"){
+        if($ruta["query"]=="ctrRegFactura" || $ruta["query"]=="ctrEditFactura" || $ruta["query"]=="ctrEliFactura"){
             $metodo=$ruta["query"];
-            $usuario=new ControladorUsuario();
-            $usuario->$metodo();
+            $factura=new ControladorFactura();
+            $factura->$metodo();
         }
     }
 
-class ControladorUsuario{
-
-    static public function ctrIngresoUsuario(){
-        if(isset($_POST["usuario"])){
-            $usuario=$_POST["usuario"];
-            $password=$_POST["password"];
-
-            $resultado=ModeloUsuario::mdlAccesoUsuario($usuario);
-
-            // if($resultado["login_usuario"]==$usuario && $resultado["password"]==$password && $resultado["estado_usuario"]==1){
-            //     echo "CORRECTO";
-            // }
-            // else{
-            //     echo "YAAAAAAAAA";
-            // }
-
-
-
-            if($resultado["login_usuario"]==$usuario && $resultado["password"]==$password && $resultado["estado_usuario"]==1){
-                echo '<script>
-                window.location="inicio";
-                </script>';
-            }
-
-
-
-            // if($resultado["login_usuario"]==$usuario && password_verify($password,$resultado["password"]) && $resultado["estado_usuario"]==1){
-        
-            //     $_SESSION["ingreso"]=$resultado["login_usuario"];
-            //     $_SESSION["perfil"]=$resultado["perfil"];
-            //     $_SESSION["idUsuario"]=$resultado["id_usuario"];
-            //     $_SESSION["ingreso"]="ok";
-                
-            //     date_default_timezone_set("America/La_Paz");
-            //     $fecha=date("Y-m-d");
-            //     $hora=date("H-i-s");
-                
-            //     $fechaHora=$fecha." ".$hora;
-            //     $id=$resultado["id_usuario"];
-                
-            //     $ultimoLogin=ModeloUsuario::mdlActualizarAcceso($fechaHora, $id);
-                
-            //     if($ultimoLogin=="ok"){
-                  
-            //       echo '<script>
-                
-            //     window.location="inicio";
-                
-                
-            //     </script>';
-            //     }
-                
-                
-            // }
-        }
-    }
-
-    static public function ctrInfoUsuarios(){
-        $respuesta=ModeloUsuario::mdlInfoUsuarios();
+class ControladorFactura{
+    static public function ctrInfoFacturas(){
+        $respuesta=ModeloFactura::mdlInfoFacturas();
         return $respuesta;
     }
-    static public function ctrRegUsuario(){
-        // $respuesta=ModeloUsuario::mdlInfoUsuarios();
+    static public function ctrRegFactura(){
+        // $respuesta=ModeloFactura::mdlInfoFacturas();
         // return $respuesta;
 
-        require "../modelo/usuarioModelo.php";
-        $password=password_hash($_POST["password"], PASSWORD_DEFAULT);
+        require "../modelo/facturaModelo.php";
         $data=array(
-            "loginUsuario"=>$_POST["login"],
-            "password"=>$password,
-            "perfil"=>"Moderador"
+            "codFactFactura"=>$_POST["codFact"],
+            "IdCliFactura"=>$_POST["IdCli"],
+            "detailFactura"=>$_POST["detail"],
+            "netoFactura"=>$_POST["neto"],
+            "descuentoFactura"=>$_POST["descuento"],
+            "totalFactura"=>$_POST["total"],
+            "fechaEmisionFactura"=>$_POST["fechaEmision"],
+            "cufdFactura"=>$_POST["cufd"],
+            "cufFactura"=>$_POST["cuf"],
+            "xmlFactura"=>$_POST["xml"],
+            "IDVentaFactura"=>$_POST["IDVenta"],
+            "IdUserFactura"=>$_POST["IdUser"],
+            "UserFactura"=>$_POST["User"],
+            "leyendaFactura"=>$_POST["leyenda"]
         );
-        $respuesta=ModeloUsuario::mdlRegUsuario($data);
+        $respuesta=ModeloFactura::mdlRegFactura($data);
         echo $respuesta;
     }
-    static public function ctrInfoUsuario($id){
-        $respuesta=ModeloUsuario::mdlInfoUsuario($id);
+    static public function ctrInfoFactura($id){
+        $respuesta=ModeloFactura::mdlInfoFactura($id);
         return $respuesta;
     }
-    static public function ctrEditUsuario(){
-        require "../modelo/usuarioModelo.php";
+    static public function ctrEditFactura(){
+        require "../modelo/facturaModelo.php";
 
         if($_POST["password"]==$_POST["passActual"]){
             $password=$_POST["password"];
@@ -99,18 +53,18 @@ class ControladorUsuario{
         }
         $data=array(
             "password"=>$password,
-            "id"=>$_POST["idUsuario"],
+            "id"=>$_POST["idFactura"],
             "perfil"=>$_POST["perfil"],
             "estado"=>$_POST["estado"]
         );
-        ModeloUsuario::mdlEditUsuario($data);
-        $respuesta=ModeloUsuario::mdlEditUsuario($data);
+        ModeloFactura::mdlEditFactura($data);
+        $respuesta=ModeloFactura::mdlEditFactura($data);
         echo $respuesta;
     }
-    static public function ctrEliUsuario(){
-        require "../modelo/usuarioModelo.php";
+    static public function ctrEliFactura(){
+        require "../modelo/facturaModelo.php";
         $id=$_POST["id"];
-        $respuesta=ModeloUsuario::mdlEliUsuario($id);
+        $respuesta=ModeloFactura::mdlEliFactura($id);
         echo $respuesta;
     }
 }
