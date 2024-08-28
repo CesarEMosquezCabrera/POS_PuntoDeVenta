@@ -86,7 +86,7 @@ function editProducto() {
                         timer:1000
                     })
                     setTimeout(function() {
-                        // location.reload()
+                        location.reload()
                     },1200)
                 }else{
                     Swal.fire({
@@ -147,6 +147,32 @@ function previsualizar() {
         })
     }else if(imagen["size"]>10000000){
         $("#imgProducto").val("")
+        Swal.fire({
+            icon:'error',
+            showConfirmButton:false,
+            tittle:"El archivo es mayor a 10MB",
+        })
+    }else{
+        let datosImagen=new FileReader
+        datosImagen.readAsDataURL(imagen)
+        $(datosImagen).on("load",function(event){
+            let rutaImagen=event.target.result
+            $(".previsualizar").attr("src",rutaImagen)
+        })
+    }
+}
+function Eprevisualizar() {
+    console.log("sss22");
+    let imagen=document.getElementById("imgProducto2").files[0]
+    if (imagen["type"]!="image/png" && imagen["type"]!="image/jpeg") {
+        $("#imgProducto2").val("") 
+        Swal.fire({
+            icon:'error',
+            showConfirmButton:false,
+            tittle:"El archivo no es PNG o JPEG",
+        })
+    }else if(imagen["size"]>10000000){
+        $("#imgProducto2").val("")
         Swal.fire({
             icon:'error',
             showConfirmButton:false,

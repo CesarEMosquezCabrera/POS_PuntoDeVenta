@@ -20,13 +20,13 @@
           <div class="form-group">
             <label for="exampleInputBorder">Codigo Producto</label>
             <input type="text" class="form-control form-control-border" placeholder="" name="codigo" id="codigo" value="<?php echo $producto["cod_producto"]; ?>" readonly>
-            <input type="hidden" name="idProducto" value="<?php echo $producto["id_producto"]; ?>">
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label for="exampleInputBorder">Codigo Producto SIN</label>
             <input type="text" class="form-control form-control-border" placeholder="" name="codigoSIN" id="codigoSIN" value="<?php echo $producto["cod_producto_sin"]; ?>">
+            <input type="hidden" name="idProducto" value="<?php echo $producto["id_producto"]; ?>">
           </div>
         </div>
       </div>
@@ -67,9 +67,9 @@
             <label>Imagen Producto <span class="text-muted">(Peso max. 10MB-JPG,PNG)</span></label>
             <div class="input-group">
               <div class="custom-file">
-                <input type="file" class="custom-file-input" id="imgProducto" name="imgProducto" onchange="previsualizar()">
+                <input type="file" class="custom-file-input" id="imgProducto2" name="imgProducto2" onchange="Eprevisualizar()">
                 <input type="hidden" name="imgActual" value="<?php echo $producto["imagen_producto"]; ?>  ">
-                <label class="custom-file-label" for="imgProducto">Elegir Archivo</label>
+                <label class="custom-file-label" for="imgProducto2">Elegir Archivo</label>
               </div>
               <div class="input-group-append">
                 <span class="input-group-text">Subir</span>

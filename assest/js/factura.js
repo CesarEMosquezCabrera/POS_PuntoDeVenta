@@ -1,3 +1,52 @@
+
+// Variables GLOBALES
+var host="http://localhost:5000/"
+function verificarComunicacion() {
+    var obj=""
+    $.ajax({
+        type:"POST",
+        url:host+"api/CompraVenta/comunicacion",
+        data:obj,
+        cache:false,
+        contentType:"application/json",
+        processData:false,
+        success:function(data){
+            if(data['transaccion']==true){
+                console.log("linea")
+                document.getElementById("comunSiat").innerHTML="Conectado"
+                document.getElementById("comunSiat").className="badge badge-success"
+            }
+        }
+    }).fail(function(jqXHR, textStatus, errorThrown){
+        if(jqXHR.status==0){
+            document.getElementById("comunSiat").innerHTML="Desconectado"
+            document.getElementById("comunSiat").className="badge badge-danger"
+        }
+    })
+}
+
+setInterval(verificarComunicacion,3000)
+
+function busCliente() {
+    let nitCliente=document.getElementById("nitCliente").value
+    console.log(nitCliente)
+    var obj={
+        nitCliente:nitCliente
+    }
+    console.log("AAAAAAAAAAAAA")
+    $.ajax({
+        type:"POST",
+        url:"controlador/clienteControlador.php?ctrBusCliente",
+        data:obj,
+        dataType:"json",
+        success:function(data){
+            console.log("AAAAAAAAAAAAA")
+            console.log(data)
+            console.log("AAAAAAAAAAAAA")
+        }
+    })
+}
+
 function MNuevoFactura(){
     $("#modal-warning").modal("show");
 
