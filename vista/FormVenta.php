@@ -1,5 +1,3 @@
-
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -51,7 +49,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" list="listaClientes" name="nitCliente" id="nitCliente">
                                 <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" onclick="busCliente()">
+                                    <button class="btn btn-outline-secondary" type="button" onclick ="busCliente()">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>

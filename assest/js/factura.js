@@ -1,4 +1,28 @@
-
+function busCliente() {
+    let nitCliente=document.getElementById("nitCliente").value
+    console.log(nitCliente)
+    var obj={
+        nitCliente:nitCliente
+    }
+    console.log("AAAAAAAA32AAAAA")
+    $.ajax({
+        type:"POST",
+        url:"controlador/clienteControlador.php?ctrBusCliente",
+        data:obj,
+        dataType:"json",
+        success:function(data){
+            console.log("AAAAAAAAAAAAA")
+            console.log(data)
+            console.log("AAAAAAAAAAAAA")
+            if(data["email_cliente"]==""){
+                document.getElementById("emailCliente").value="null"
+            }else{
+                document.getElementById("emailCliente").value=data["email_cliente"]
+            }
+            document.getElementById("rsCliente").value=data["razon_social_cliente"]
+        }
+    })
+}
 // Variables GLOBALES
 var host="http://localhost:5000/"
 function verificarComunicacion() {
@@ -27,25 +51,7 @@ function verificarComunicacion() {
 
 setInterval(verificarComunicacion,3000)
 
-function busCliente() {
-    let nitCliente=document.getElementById("nitCliente").value
-    console.log(nitCliente)
-    var obj={
-        nitCliente:nitCliente
-    }
-    console.log("AAAAAAAAAAAAA")
-    $.ajax({
-        type:"POST",
-        url:"controlador/clienteControlador.php?ctrBusCliente",
-        data:obj,
-        dataType:"json",
-        success:function(data){
-            console.log("AAAAAAAAAAAAA")
-            console.log(data)
-            console.log("AAAAAAAAAAAAA")
-        }
-    })
-}
+
 
 function MNuevoFactura(){
     $("#modal-warning").modal("show");

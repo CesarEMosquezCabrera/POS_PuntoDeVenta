@@ -78,8 +78,8 @@ class ControladorCliente{
     static function ctrBusCliente(){
         require "../modelo/clienteModelo.php";
         $nitCliente=$_POST["nitCliente"];
-
-        $respuesta=ModeloCliente::mdlBusCliente($nitCliente);
+        $respuesta = ModeloCliente::mdlBusCliente($nitCliente);
         echo json_encode($respuesta);
+        //echo $respuesta;
     }
 }
