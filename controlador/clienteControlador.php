@@ -3,7 +3,10 @@
     // var_dump($ruta);
 
     if(isset($ruta["query"])){
-        if($ruta["query"]=="ctrRegCliente" || $ruta["query"]=="ctrEditCliente"|| $ruta["query"]=="ctrBusCliente" || $ruta["query"]=="ctrEliCliente"){
+        if($ruta["query"]=="ctrRegCliente"||
+        $ruta["query"]=="ctrEditCliente"||
+        $ruta["query"]=="ctrBusCliente" || 
+        $ruta["query"]=="ctrEliCliente"){
             $metodo=$ruta["query"];
             $cliente=new ControladorCliente();
             $cliente->$metodo();

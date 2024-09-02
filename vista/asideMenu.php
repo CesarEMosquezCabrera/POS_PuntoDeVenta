@@ -48,7 +48,7 @@
           <img src="assest/dist/img/imagenes/user_default.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Usuario Administrador</a>
+          <a href="#" class="d-block" id="usuarioLogin"><?php echo $_SESSION["login"]; ?></a>
         </div>
       </div>
 

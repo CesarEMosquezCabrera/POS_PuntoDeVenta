@@ -3,7 +3,10 @@
     // var_dump($ruta);
 
     if(isset($ruta["query"])){
-        if($ruta["query"]=="ctrRegProducto" || $ruta["query"]=="ctrEditProducto" || $ruta["query"]=="ctrEliProducto"){
+        if($ruta["query"]=="ctrRegProducto" ||
+        $ruta["query"]=="ctrEditProducto" ||
+        $ruta["query"]=="ctrBusProducto" ||
+        $ruta["query"]=="ctrEliProducto"){
             $metodo=$ruta["query"];
             $producto=new ControladorProducto();
             $producto->$metodo();
@@ -127,5 +130,13 @@ class ControladorProducto{
         $id=$_POST["id"];
         $respuesta=ModeloProducto::mdlEliProducto($id);
         echo $respuesta;
+    }
+    static public function ctrBusProducto(){
+        require "../modelo/productoModelo.php";
+        $codProducto=$_POST["codProducto"];
+        $respuesta = ModeloProducto::mdlBusProducto($codProducto);
+        echo json_encode($respuesta);
+        //echo $respuesta;
+        //echo "<script>console.log('aa')</script>";
     }
 }
