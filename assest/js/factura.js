@@ -8,6 +8,10 @@ var telEmpresa="9422560"
 var dirEmpresa="Calle Pucara 129 AVENIDA 7MO ANILLO NRO. 7550 ZONA/BARRIO: TIERRAS NUEVAS UV:0135 MZA:007"
 var token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w"
 
+var cufd;
+var codControlCufd;
+var fechaVigCufd;
+
 function verificarComunicacion() {
     var obj=""
     $.ajax({
@@ -187,6 +191,88 @@ function calcularTotal(){
   document.getElementById("totApagar").value=totalCarrito-descAdicional
 }
 /*============
+OBTENCION DE CUFD
+============*/
+function solicitudCufd(){
+  var obj={
+    codigoAmbiente:2,
+    codigoModalidad:2,
+    codigoPuntoVenta:0,
+    codigoPuntoVentaSpecified:true,
+    codigoSistema:codSistema,
+    codigoSucursal:0,
+    nit:nitEmpresa,
+    cuis:cuis
+  }
+
+  $.ajax({
+    type: "POST",
+    url:host+"api/Codigos/solicitudCufd?token="+token,
+    data: JSON.stringify(obj),
+    cache:false,
+    contentType:"application/json",
+    success: function (data) {
+      //console.log(data)
+      cufd=data["codigo"]
+      codControlCufd=data["codigoControl"]
+      fechaVigCufd=data["fechaVigencia"]
+    }
+  })
+}
+/*============
+REGISTRAR NUEVO CUFD 
+============*/
+function registrarNuevoCufd(){
+  var obj={
+    "cufd":cufd,
+    "fechaVigCufd":fechaVigCufd,
+    "codControlCufd":codControlCufd
+  }
+
+  $.ajax({
+    type: "POST",
+    data: obj,
+    url:"controlador/facturaControlador.php?ctrNuevoCufd",
+    cache:false,
+    success: function (data) {
+      console.log(data)
+    }
+  })
+}
+/*============
+verificar vigenciacufd
+============*/
+function verificarVigenciaCufd(){
+  //fecha actual
+  let date=new Date()
+  //obtener el ultimo registro de cufd de DB
+  var obj=""
+  $.ajax({
+    type: "POST",
+    url:"controlador/facturaControlador.php?ctrUltimoCufd",
+    data: obj,
+    cache:false,
+    dataType:"json",
+    success: function (data) {
+      //console.log(data)
+      //Fecha del ultimo cufd de mi DB
+      let vigCufdActual=new Date(data["fecha_vigencia"])
+      //console.log(vigCufdActual)
+      if(date.getTime()>vigCufdActual.getTime()){
+        $("#panelInfo").before("<span class='text-warning'>CUFD CADUCADO!!!</span><br>")
+        $("#panelInfo").before("<span>Registrando cufd...</span><br>")
+        //registrarNuevoCufd()
+      }else{
+        $("#panelInfo").before("<span class='text-success'>CUFD Vigente, puede facturarar!!!</span><br>")
+        // cufd=data["codigo_cufd"]
+        // codControlCufd=data["codigo_control"]
+        // fechaVigCufd=data["fecha_vigencia"]
+
+      }
+    }
+  })
+}
+/*============
 EMITIR FACTURA
 ============*/
 function emitirFactura(cod){
@@ -234,9 +320,24 @@ function emitirFactura(cod){
         direccion:dirEmpresa,
         codigoPuntoVenta:0,
         fechaEmision:fechaFactura,
-        nombreRazonSocial:rsCliente
+        nombreRazonSocial:rsCliente,
+        codigoTipoDocumentoIdentidad:tpDocumento,
+        numeroDocumento:nitCliente,
+        complemento:"",
+        codigoCliente:nitCliente,
+        codigoMetodoPago:metPago,
+        numeroTarjeta:null,
+        montoTotal:subTotal,
+        montoTotalSujetoIva:totApagar,
+        montoGiftCard:0,
+        descuentoAdicional:descAdicional,
+        codigoExcepcion:"0",
+        cafc:null,
+        leyenda:"",
+        usuario:usuarioLogin,
+        codigoDocumentoSector:1
       },
-      detalle:{}
+      detalle:arregloCarrito
     }
   }
 }
