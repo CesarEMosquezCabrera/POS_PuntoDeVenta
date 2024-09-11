@@ -217,7 +217,10 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-   
+<script>
+    setTimeout(()=>{verificarVigenciaCufd()},4000)
+    setTimeout(()=>{extraerLeyenda()},5000)
+</script>
 
 
  

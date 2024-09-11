@@ -199,7 +199,7 @@ function SinCatalogo(){
         cuis: "9272DC05",
         nit: 338794023
     }
-    console.log("Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1");
+    //console.log("Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1");
     $.ajax({
         type: "POST",
         url: "http://localhost:5000/Sincronizacion/listaproductosservicios?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w",
@@ -207,8 +207,16 @@ function SinCatalogo(){
         cache: false,
         contentType: "application/json",
         success: function(data){
-            console.log("Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2");
+            //console.log("Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2");
             console.log(data)
+
+            //CESAR este codigo elimina la primera fila 
+            var tbody = document.getElementById("CatProductos");
+            while (tbody.firstChild) {
+                tbody.removeChild(tbody.firstChild);
+            }
+            //tbody.deleteRow(0);
+            //END CESAR
 
             for (var i = 0; i < data["listaCodigos"].length; i++) {
                 $("#CatProductos").append("<tr><td>"+data["listaCodigos"][i]["codigoActividad"]+"</td><td>"+data["listaCodigos"][i]["codigoProducto"]+"</td><td>"+data["listaCodigos"][i]["descripcionProducto"]+"</td><td></td></tr>")
@@ -238,7 +246,7 @@ function unidadesMedida(){
 }
 
 function MVerProducto(id) {
-    $("#modal-warning").modal("show");
+    $("#modal-lg").modal("show");
 
     var obj=""
     $.ajax({
@@ -246,7 +254,32 @@ function MVerProducto(id) {
         url:"vista/producto/MVerProducto.php?id="+id,
         data:obj,
         success:function(data){
-            $("#content-warning").html(data)
+            $("#content-lg").html(data)
+        }
+    })  
+}
+
+function SELECTPRODSIN() {
+    var obj={
+        // nit: 338794023
+        // cuis: 9272DC05
+        codigoAmbiente:2,
+        codigoPuntoVenta: 0,
+        codigoPuntoVentaSpecified: true,
+        codigoSistema: "775FA42BE90F7B78EF98F57",
+        cuis: "9272DC05",
+        nit: 338794023
+    }
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:5000/Sincronizacion/listaproductosservicios?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJTdXBlcmppY2hvMzMiLCJjb2RpZ29TaXN0ZW1hIjoiNzc1RkE0MkJFOTBGN0I3OEVGOThGNTciLCJuaXQiOiJINHNJQUFBQUFBQUFBRE0ydGpDM05ERXdNZ1lBOFFXMzNRa0FBQUE9IiwiaWQiOjYxODYwOCwiZXhwIjoxNzMzOTYxNjAwLCJpYXQiOjE3MDI0OTc2NjAsIm5pdERlbGVnYWRvIjozMzg3OTQwMjMsInN1YnNpc3RlbWEiOiJTRkUifQ.4K_pQUXnIhgI5ymmXoyL43i0pSk3uKCgLMkmQeyl67h7j55GSRsH120AD44pR0aQ1UX_FNYzWQBYrX6pWLd-1w",
+        data: JSON.stringify(obj),
+        cache: false,
+        contentType: "application/json",
+        success: function(data){
+            for (var i = 0; i < data["listaCodigos"].length; i++) {
+                $("#DDD").append("<option value="+data["listaCodigos"][i]["codigoProducto"]+">"+data["listaCodigos"][i]["codigoProducto"]+"</option>")
+            }
         }
     })  
 }

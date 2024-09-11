@@ -1,3 +1,8 @@
+<?php
+echo '<script>
+SELECTPRODSIN();
+</script>'
+?>
 <form action="" id="FRegProducto">
     <div class="modal-header">
         <h4 class="modal-title">Ingreso de Producto</h4>
@@ -18,6 +23,16 @@
           <div class="form-group">
             <label for="exampleInputBorder">Codigo Producto SIN</label>
             <input type="text" class="form-control form-control-border" placeholder="" name="codigoSIN" id="codigoSIN">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+          <label for="">Codigo Producto SIN</label>
+            <select name="DDD" id="DDD" class="form-control">
+                <!-- <option value="1">Ninguno</option>
+                <option value="2">Celula de identidad</option>
+                <option value="3">NIT</option> -->
+            </select>
           </div>
         </div>
       </div>

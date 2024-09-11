@@ -90,8 +90,8 @@ class ModeloFactura{
         }else{
             return "error";
         }
-        $stmt->closeCursor();
-        $stmt-->null;
+        // $stmt->closeCursor();
+        // $stmt-->null;
     }
     static public function mdlUltimoCufd(){
         $stmt=Conexion::conectar()->prepare("SELECT * FROM cufd WHERE id_cufd=(select max(id_cufd) from cufd)");
@@ -100,5 +100,10 @@ class ModeloFactura{
     
         // $stmt->closeCursor();
         // $stmt-->null;
+    }
+    static public function mdlLeyenda(){
+        $stmt=Conexion::conectar()->prepare("SELECT * FROM leyenda order by rand() limit 1");
+        $stmt->execute();
+        return $stmt->fetch();
     }
 }   

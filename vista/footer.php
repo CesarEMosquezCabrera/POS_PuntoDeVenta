@@ -40,7 +40,7 @@
 <script src="assest/js/producto.js"></script>
 <script src="assest/js/factura.js"></script>
 
-
+<!-- MODALS -->
 <div class="modal fade" id="modal-warning">
         <div class="modal-dialog">
           <div class="modal-content bg-warning" id="content-warning">
@@ -53,7 +53,7 @@
 <!-- /.modal -->
 
 
-<div class="modal fade" id="modal-xl">
+<div class="modal fade" id="modal-x1">
   <div class="modal-dialog modal-xl">
     <div class="modal-content" id="content-x1"> 
     </div>
@@ -62,6 +62,17 @@
   <!-- /.modal-dialog -->
 </div>
       <!-- /.modal -->
+
+      <div class="modal fade" id="modal-lg">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content" id="content-lg">
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+<!-- END MODALS -->
 
 <!-- jquery-validation -->
 <script src="assest/plugins/jquery-validation/jquery.validate.min.js"></script>

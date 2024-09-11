@@ -33,7 +33,6 @@
                   </thead>
 
                   <tbody id="CatProductos">
-                    
                   </tbody>
                 </table>
               </div>

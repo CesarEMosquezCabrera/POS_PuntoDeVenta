@@ -1,5 +1,5 @@
 <form action="" id="FRegCliente">
-    <div class="modal-header">
+    <div class="modal-header  bg-info">
         <h4 class="modal-title">Ingreso de Cliente</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
