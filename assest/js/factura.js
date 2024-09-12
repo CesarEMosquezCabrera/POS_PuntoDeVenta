@@ -407,7 +407,7 @@ function emitirFactura(){
         detalle:arregloCarrito
       }
     }
-    //console.log(JSON.stringify(obj))
+    console.log(JSON.stringify(obj))
     $.ajax({
       type:"POST",
       url:host+"api/CompraVenta/recepcion",
