@@ -102,7 +102,7 @@
                                 </div>
                             </div>
                             <!-- panel de avisos -->
-                             <div class="callout callout-info direct-chat-messanges" style="height:100px; width:290px;">
+                             <div class="callout callout-info direct-chat-messanges" style="overflow-y: auto; height:100px; width:290px;">
                                 <span class="list-unstyled" id="panelInfo"></span>
                              </div>
                         </div>

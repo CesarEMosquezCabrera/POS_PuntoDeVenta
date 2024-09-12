@@ -306,72 +306,118 @@ function extraerLeyenda() {
     }
   })
 }
+
+/*============
+EMITIR FACTURA
+============*/
+function validarFormulario(){
+  let numFactura=document.getElementById("numFactura").value
+  let nitCliente=document.getElementById("nitCliente").value
+  let emailCliente=document.getElementById("emailCliente").value
+  let rsCliente=document.getElementById("rsCliente").value
+
+  if(numFactura==null || numFactura.length==0){
+    $("#panelInfo").before("<span class='text-danger'>LLENE LOS CAMPOS FALTANTES</span><br>");
+    return false
+  }else if(nitCliente==null || nitCliente.length==0){
+    $("#panelInfo").before("<span class='text-danger'>LLENE LOS CAMPOS FALTANTES</span><br>");
+    return false
+  }else if(emailCliente==null || emailCliente.length==0){
+    $("#panelInfo").before("<span class='text-danger'>LLENE LOS CAMPOS FALTANTES</span><br>");
+    return false
+  }else if(rsCliente==null || rsCliente.length==0){
+    $("#panelInfo").before("<span class='text-danger'>LLENE LOS CAMPOS FALTANTES</span><br>");
+    return false
+  }
+  return true
+}
+
 /*============
 EMITIR FACTURA
 ============*/
 function emitirFactura(){
-  let date=new Date()
-  let numFactura=parseInt(document.getElementById("numFactura").value)
-  let fechaFactura=date.toISOString()
-  let rsCliente=document.getElementById("rsCliente").value
-  let tpDocumento=parseInt(document.getElementById("tpDocumento").value)
-  let nitCliente=document.getElementById("nitCliente").value
-  let metPago=parseInt(document.getElementById("metPago").value)
-  let totApagar=parseFloat(document.getElementById("totApagar").value)
-  let descAdicional=parseFloat(document.getElementById("descAdicional").value)
-  let subTotal=parseFloat(document.getElementById("subTotal").value)
-  let usuarioLogin=document.getElementById("usuarioLogin").innerHTML
 
-  let actEconomica=document.getElementById("actEconomica").value
-  let emailcliente=document.getElementById("emailCliente").value
-  var obj={
-    codigoAmbiente:2,
-    codigoDocumentoSector:1,
-    codigoEmision:1,
-    codigoModalidad:2,
-    codigoPuntoVenta:0,
-    codigoPuntoVentaSpecified:true,
-    codigoSistema:codSistema,
-    codigoSucursal:0,
-    cufd:cufd,
-    cuis:cuis,
-    nit:nitEmpresa,
-    tipoFacturaDocumento:1,
-    archivo:null,
-    fechaEnvio:fechaFactura,
-    hashArchivo:"",
-    codigoControl:codControlCufd,
-    factura:{
-      cabecera:{
-        nitEmisor:nitEmpresa,
-        razonSoncialEmisor:rsEmpresa,
-        municipio:"Santa Cruz",
-        telefono:telEmpresa,
-        numeroFactura:numFactura,
-        cuf:"String",
-        cufd:cufd,
-        codigoSucursal:0,
-        direccion:dirEmpresa,
-        codigoPuntoVenta:0,
-        fechaEmision:fechaFactura,
-        nombreRazonSocial:rsCliente,
-        codigoTipoDocumentoIdentidad:tpDocumento,
-        numeroDocumento:nitCliente,
-        complemento:"",
-        codigoCliente:nitCliente,
-        codigoMetodoPago:metPago,
-        numeroTarjeta:null,
-        montoTotal:subTotal,
-        montoTotalSujetoIva:totApagar,
-        montoGiftCard:0,
-        descuentoAdicional:descAdicional,
-        codigoExcepcion:"0",
-        cafc:null,
-        leyenda:leyenda,
-        usuario:usuarioLogin,
-        codigoDocumentoSector:1
-      },
-      detalle:arregloCarrito
+  if(validarFormulario()==true){
+
+    let date=new Date()
+    let numFactura=parseInt(document.getElementById("numFactura").value)
+    let fechaFactura=date.toISOString()
+    let rsCliente=document.getElementById("rsCliente").value
+    let tpDocumento=parseInt(document.getElementById("tpDocumento").value)
+    let nitCliente=document.getElementById("nitCliente").value
+    let metPago=parseInt(document.getElementById("metPago").value)
+    let totApagar=parseFloat(document.getElementById("totApagar").value)
+    let descAdicional=parseFloat(document.getElementById("descAdicional").value)
+    let subTotal=parseFloat(document.getElementById("subTotal").value)
+    let usuarioLogin=document.getElementById("usuarioLogin").innerHTML
+
+    let actEconomica=document.getElementById("actEconomica").value
+    let emailcliente=document.getElementById("emailCliente").value
+    var obj={
+      codigoAmbiente:2,
+      codigoDocumentoSector:1,
+      codigoEmision:1,
+      codigoModalidad:2,
+      codigoPuntoVenta:0,
+      codigoPuntoVentaSpecified:true,
+      codigoSistema:codSistema,
+      codigoSucursal:0,
+      cufd:cufd,
+      cuis:cuis,
+      nit:nitEmpresa,
+      tipoFacturaDocumento:1,
+      archivo:null,
+      fechaEnvio:fechaFactura,
+      hashArchivo:"",
+      codigoControl:codControlCufd,
+      factura:{
+        cabecera:{
+          nitEmisor:nitEmpresa,
+          //razonSoncialEmisor:rsEmpresa,
+          razonSocialEmisor:rsEmpresa,
+          municipio:"Santa Cruz",
+          telefono:telEmpresa,
+          numeroFactura:numFactura,
+          cuf:"String",
+          cufd:cufd,
+          codigoSucursal:0,
+          direccion:dirEmpresa,
+          codigoPuntoVenta:0,
+          fechaEmision:fechaFactura,
+          nombreRazonSocial:rsCliente,
+          codigoTipoDocumentoIdentidad:tpDocumento,
+          numeroDocumento:nitCliente,
+          complemento:"",
+          codigoCliente:nitCliente,
+          codigoMetodoPago:metPago,
+          numeroTarjeta:null,
+          montoTotal:subTotal,
+          montoTotalSujetoIva:totApagar,
+          codigoMoneda:1,
+          tipoCambio:1,
+          montoTotalMoneda:totApagar,
+          montoGiftCard:0,
+          descuentoAdicional:descAdicional,
+          codigoExcepcion:0,
+          cafc:null,
+          leyenda:leyenda,
+          usuario:usuarioLogin,
+          codigoDocumentoSector:1
+        },
+        detalle:arregloCarrito
+      }
     }
+    //console.log(JSON.stringify(obj))
+    $.ajax({
+      type:"POST",
+      url:host+"api/CompraVenta/recepcion",
+      data:JSON.stringify(obj),
+      cache:false,
+      contentType:"application/json",
+      processData:false,
+      success:function(data){
+        console.log(data);
+      }
+    })
   }
 }

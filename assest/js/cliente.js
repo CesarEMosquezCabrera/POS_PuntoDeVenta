@@ -1,5 +1,5 @@
 function MNuevoCliente(){
-    $("#modal-xl").modal("show");
+    $("#modal-warning").modal("show");
 
     var obj=""
     $.ajax({
@@ -7,7 +7,7 @@ function MNuevoCliente(){
         url:"vista/cliente/FNuevoCliente.php",
         data:obj,
         success:function(data){
-            $("#content-x1").html(data)
+            $("#content-warning").html(data)
         }
     })
 }
