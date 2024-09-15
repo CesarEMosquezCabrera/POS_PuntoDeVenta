@@ -8,6 +8,7 @@
         $ruta["query"]=="ctrNumFactura" ||
         $ruta["query"]=="ctrNuevoCufd" ||
         $ruta["query"]=="ctrUltimoCufd" ||
+        $ruta["query"]=="ctrRegistrarFactura" ||
         $ruta["query"]=="ctrLeyenda" ||
         $ruta["query"]=="ctrEliFactura"){
             $metodo=$ruta["query"];
@@ -78,5 +79,27 @@ class ControladorFactura{
         
         $respuesta=ModeloFactura::mdlLeyenda();
         echo json_encode($respuesta);
+    }
+    static public function ctrRegistrarFactura(){
+        require "../modelo/facturaModelo.php";
+        
+        $data=array(
+            "codFactura"=>$_POST["codFactura"],
+            "idCliente"=>$_POST["idCliente"],
+            "detalle"=>$_POST["detalle"],
+            "neto"=>$_POST["neto"],
+            "descuento"=>$_POST["descuento"],
+            "total"=>$_POST["total"],
+            "fechaEmision"=>$_POST["fechaEmision"],
+            "cufd"=>$_POST["cufd"],
+            "cuf"=>$_POST["cuf"],
+            "xml"=>$_POST["xml"],
+            "idUsuario"=>$_POST["idUsuario"],
+            "usuario"=>$_POST["usuario"],
+            "leyenda"=>$_POST["leyenda"]
+        );
+
+        $respuesta=ModeloFactura::mdlRegistrarFactura($data);
+        echo $respuesta;
     }
 }
