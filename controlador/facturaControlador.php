@@ -3,9 +3,7 @@
     // var_dump($ruta);
 
     if(isset($ruta["query"])){
-        if($ruta["query"]=="ctrRegFactura" ||
-        $ruta["query"]=="ctrEditFactura" ||
-        $ruta["query"]=="ctrNumFactura" ||
+        if($ruta["query"]=="ctrNumFactura" ||
         $ruta["query"]=="ctrNuevoCufd" ||
         $ruta["query"]=="ctrUltimoCufd" ||
         $ruta["query"]=="ctrRegistrarFactura" ||

@@ -63,14 +63,24 @@
 </div>
       <!-- /.modal -->
 
-      <div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content" id="content-lg">
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
+<div class="modal fade" id="modal-lg">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="content-lg">
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+      <!-- /.modal -->
+
+<div class="modal fade" id="modal-xl">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content" id="content-xl">
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
       <!-- /.modal -->
 <!-- END MODALS -->
 
