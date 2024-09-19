@@ -3,39 +3,13 @@ require_once "conexion.php";
 class ModeloFactura{
 
     static public function mdlInfoFacturas(){
-    $stmt=Conexion::conectar()->prepare("SELECT id_factura, cod_factura, razon_social_cliente, fecha_emision, total,estado_factura FROM factura JOIN cliente ON cliente.id_cliente=factura.id_cliente");
+    $stmt=Conexion::conectar()->prepare("SELECT id_factura, cod_factura, razon_social_cliente, fecha_emision, total,estado_factura,cuf FROM factura JOIN cliente ON cliente.id_cliente=factura.id_cliente");
     $stmt->execute();
     return $stmt->fetchAll();
 
     // $stmt->closeCursor();
     // $stmt-->null;
     }
-    // static public function mdlRegFactura($data){
-    //     $codFactFactura=$data["codFactFactura"];
-    //     $IdCliFactura=$data["IdCliFactura"];
-    //     $detailFactura=$data["detailFactura"];
-    //     $netoFactura=$data["netoFactura"];
-    //     $descuentoFactura=$data["descuentoFactura"];
-    //     $totalFactura=$data["totalFactura"];
-    //     $fechaEmisionFactura=$data["fechaEmisionFactura"];
-    //     $cufdFactura=$data["cufdFactura"];
-    //     $cufFactura=$data["cufFactura"];
-    //     $xmlFactura=$data["xmlFactura"];
-    //     $IDVentaFactura=$data["IDVentaFactura"];
-    //     $IdUserFactura=$data["IdUserFactura"];
-    //     $UserFactura=$data["UserFactura"];
-    //     $leyendaFactura=$data["leyendaFactura"];
-
-    //     $stmt=Conexion::conectar()->prepare("insert into factura(cod_factura,id_cliente,detalle,neto,descuento,total,fecha_emision,cufd,cuf,login_factura,password,perfil,password,perfil)values('$loginFactura','$password','$perfil')");
-
-    //     if($stmt->execute()){
-    //         return "ok";
-    //     }else{
-    //         return "error";
-    //     }
-    //     // $stmt->closeCursor();
-    //     // $stmt-->null;
-    // }
     static public function mdlInfoFactura($id){
         $stmt=Conexion::conectar()->prepare("SELECT * FROM factura JOIN cliente ON cliente.id_cliente=factura.id_cliente where id_factura=$id");
         $stmt->execute();
@@ -61,9 +35,9 @@ class ModeloFactura{
         // $stmt->closeCursor();
         // $stmt-->null;
     }
-    static public function mdlEliFactura($id){
+    static public function mdlAnularFactura($cuf){
 
-        $stmt=Conexion::conectar()->prepare("delete from factura where id_factura=$id");
+        $stmt=Conexion::conectar()->prepare("UPDATE factura SET estado_factura=0 WHERE cuf='$cuf'");
 
         if($stmt->execute()){
             return "ok";

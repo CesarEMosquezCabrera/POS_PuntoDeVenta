@@ -102,11 +102,13 @@ function numFactura(){
   })
 }
 function calcularPreProd(){
+  //descuento aplicar sobre total del producto
   let cantPro=parseInt(document.getElementById("cantProducto").value)
   let descProducto=parseFloat(document.getElementById("descProducto").value)
   let preUnit=parseFloat(document.getElementById("preUnitario").value)
-  let preProducto=preUnit-descProducto
-  document.getElementById("preTotal").value=preProducto*cantPro
+  //let preProducto=preUnit-descProducto
+  let preProducto=(preUnit*cantPro)-descProducto
+  document.getElementById("preTotal").value=preProducto
 
 }
 // CARRITO
@@ -269,7 +271,9 @@ function verificarVigenciaCufd(){
     cache:false,
     dataType:"json",
     success: function (data) {
+      console.log("/////// INICIO VERIFICANDO EL CUFD ///////")
       console.log(data)
+      console.log("/////// FIN VERIFICANDO EL CUFD ///////")
       //Fecha del ultimo cufd de mi DB
       let vigCufdActual=new Date(data["fecha_vigencia"])
       console.log(":::ddd "+date.getTime())
@@ -521,4 +525,96 @@ function MVerFactura(id) {
           $("#content-xl").html(data)
       }
   })  
+}
+
+/*================
+ELIMINAR LA FACTURA
+================*/
+
+function MEliFactura(cuf) {
+  let obj={
+    codigoAmbiente:2,
+    codigoPuntoVenta:0,
+    codigoPuntoVentaSpecified:true,
+    codigoSistema:codSistema,
+    codigoSucursal:0,
+    nit:nitEmpresa,
+    codigoDocumentoSector:1,
+    codigoEmision:1,
+    codigoModalidad:2,
+    cufd:cufd,
+    cuis:cuis,
+    tipoFacturaDocumento:1,
+    codigoMotivo:1,
+    cuf:cuf
+  }
+
+  Swal.fire({
+    title:"¿Estas seguro?",
+    showDenyButton:true,
+    showCancelButton:false,
+    confirmButtonText:"Confirmar",
+    denyButtonText:"Cancelar"
+}).then((result)=>{
+    if(result.isConfirmed){
+        $.ajax({
+            type:"POST",
+            url:host+"api/CompraVenta/anulacion",
+            data:JSON.stringify(obj),
+            cache:false,
+            contentType:"application/json",
+            processData:false,
+            success: function(data) {
+              console.log(data)
+              if(data["codigoEstado"]==905){
+              //ANULACION EN BD
+                anularFactura(cuf)
+              }
+              else{
+                Swal.fire({
+                  icon:'error',
+                  title:"ERROR",
+                  text:"Anulación rechazada",
+                  showConfirmButton:false,
+                  timer:1000
+              })
+              }
+            }
+        })
+    }
+})
+}
+
+function anularFactura(cuf){
+  let obj={
+    cuf:cuf
+  }
+  $.ajax({
+    type:"POST",
+    url:"controlador/facturaControlador.php?ctrAnularFactura",
+    data:obj,
+    success: function(data) {
+      if(data=="ok"){
+        Swal.fire({
+          icon:'success',
+          title:"FACTURA ANULADA ",
+          showConfirmButton:false,
+          timer:1000
+      })
+
+      setTimeout(function(){
+        location.reload()
+      },1200)
+      }else{
+
+        Swal.fire({
+          icon:'error',
+          title:"ERROR",
+          text:"ERROR AL ANULAR",
+          showConfirmButton:false,
+          timer:1000
+      })
+      }
+    }
+})
 }
