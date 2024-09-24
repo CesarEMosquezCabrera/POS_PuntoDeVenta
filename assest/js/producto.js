@@ -240,10 +240,12 @@ function unidadesMedida(){
         cache: false,
         contentType: "application/json",
         success: function(data){
-            console.log(data)
+            console.log("Funcion UNIDADESMEDIDA"+data+" FIN unidadesMedida")
         }
     })
 }
+//ESTO PARECE QUE NO ES PARA NADA PERO LO DEJARE IGUAL
+unidadesMedida()
 
 function MVerProducto(id) {
     $("#modal-lg").modal("show");
@@ -278,8 +280,25 @@ function SELECTPRODSIN() {
         contentType: "application/json",
         success: function(data){
             for (var i = 0; i < data["listaCodigos"].length; i++) {
-                $("#DDD").append("<option value="+data["listaCodigos"][i]["codigoProducto"]+">"+data["listaCodigos"][i]["codigoProducto"]+"</option>")
+                var descripcion = data["listaCodigos"][i]["descripcionProducto"].substring(0, 15);
+                $("#codigoSIN").append("<option value="+data["listaCodigos"][i]["codigoProducto"]+">"+data["listaCodigos"][i]["codigoProducto"] +" - "+descripcion+"</option>")
+
+                //$("#nombre").val(data["listaCodigos"][i]["descripcionProducto"])
             }
+
+            $("#codigoSIN").on('change', function() {
+                var codigoSeleccionado = $(this).val();
+                for (var i = 0; i < data["listaCodigos"].length; i++) {
+                    if (data["listaCodigos"][i]["codigoProducto"] == codigoSeleccionado) {
+                        $("#nombre").val(data["listaCodigos"][i]["descripcionProducto"]);
+                        break;
+                    }
+                }
+            });
+
+            /**for (var i = 0; i < data["listaCodigos"].length; i++) {
+                $("#CatProductos").append("<tr><td>"+data["listaCodigos"][i]["codigoActividad"]+"</td><td>"+data["listaCodigos"][i]["codigoProducto"]+"</td><td>"+data["listaCodigos"][i]["descripcionProducto"]+"</td><td></td></tr>")
+            }*/
         }
     })  
 }

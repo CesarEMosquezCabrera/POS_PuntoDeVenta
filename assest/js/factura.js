@@ -278,13 +278,23 @@ function verificarVigenciaCufd(){
       let vigCufdActual=new Date(data["fecha_vigencia"])
       console.log(":::ddd "+date.getTime())
       console.log(":::vvv "+vigCufdActual.getTime())
-      if(date.getTime()>vigCufdActual.getTime()){console.log("true")}else{console.log("false")}
+      if(date.getTime()>vigCufdActual.getTime() || data == false){console.log("true")}else{console.log("false")}
 
+      // if(date.getTime()>vigCufdActual.getTime() || data == false){
+      //   $("#panelInfo").before("<span class='text-warning'>CUFD CADUCADO!!!</span><br>")
+      //   $("#panelInfo").before("<span>Registrando cufd...</span><br>")
+      //   registrarNuevoCufd()
+      // }else{
       if(date.getTime()>vigCufdActual.getTime()){
         $("#panelInfo").before("<span class='text-warning'>CUFD CADUCADO!!!</span><br>")
         $("#panelInfo").before("<span>Registrando cufd...</span><br>")
         registrarNuevoCufd()
-      }else{
+      }else if (data==false){
+        $("#panelInfo").before("<span class='text-warning'>CUFD Inexistente!!!</span><br>")
+        $("#panelInfo").before("<span>Registrando cufd...</span><br>")
+        registrarNuevoCufd()
+      }
+      else{
         $("#panelInfo").before("<span class='text-success'>CUFD Vigente, puede facturarar!!!</span><br>")
         cufd=data["codigo_cufd"]
         codControlCufd=data["codigo_control"]

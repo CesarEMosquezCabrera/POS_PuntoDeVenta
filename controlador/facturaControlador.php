@@ -64,7 +64,7 @@ class ControladorFactura{
             "fechaVigCufd"=>$_POST["fechaVigCufd"],
             "codControlCufd"=>$_POST["codControlCufd"]
         );
-        return ModeloFactura::mdlNuevoCufd($data);
+        echo ModeloFactura::mdlNuevoCufd($data);
     }
     static public function ctrUltimoCufd(){
         require "../modelo/facturaModelo.php";

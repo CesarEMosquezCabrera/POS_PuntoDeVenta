@@ -19,18 +19,19 @@ SELECTPRODSIN();
             <input type="text" class="form-control form-control-border" placeholder="" name="codigo" id="codigo">
           </div>
         </div>
-        <div class="col-sm-6">
+        <!-- <div class="col-sm-6">
           <div class="form-group">
             <label for="exampleInputBorder">Codigo Producto SIN</label>
             <input type="text" class="form-control form-control-border" placeholder="" name="codigoSIN" id="codigoSIN">
           </div>
-        </div>
+        </div> -->
         <div class="col-sm-6">
           <div class="form-group">
-          <label for="">Codigo Producto SIN</label>
-            <select name="DDD" id="DDD" class="form-control">
+          <label for="exampleInputBorder">Codigo Producto SIN</label>
+            <select name="codigoSIN" id="codigoSIN" class="form-control form-control-border">
+              <option value="" disabled selected>Selecciones una opcion</option>
                 <!-- <option value="1">Ninguno</option>
-                <option value="2">Celula de identidad</option>
+                /*<option value="2">Celula de identidad</option>
                 <option value="3">NIT</option> -->
             </select>
           </div>
