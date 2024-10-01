@@ -7,12 +7,27 @@ $id=$_GET["id"];
 $factura=ControladorFactura::ctrInfoFactura($id);
 $producto=json_decode($factura["detalle"],true);
 
-?>
+class PDF extends FPDF{
+    /*function Footer(){
+        global $factura;
+        $this->setY(-15);
+        $this->setFont("Arial","I",8);
+        $this->Cell(100,10,$factura["leyenda"],0,0,"C");
+    }*/
+    // Pie de página
+    function Footer()
+    {
+        global $factura;
+        $this->setY(-15);
+        $this->setFont("Arial","I",8);
+        $this->Cell(0,10,$factura["leyenda"],0,0,"C");
+    }
+}
 
-<?php
 //require('fpdf.php');
 
-$pdf = new FPDF();
+//$pdf = new FPDF();
+$pdf = new PDF();
 $pdf->AddPage();
 //encabezado
 $pdf->SetFont('Arial','B',15);
