@@ -85,4 +85,10 @@ class ControladorCliente{
         echo json_encode($respuesta);
         //echo $respuesta;
     }
+    static public function ctrCantidadClientes(): mixed{
+        $respuesta = ModeloCliente::mdlCantidadClientes();
+        return $respuesta;
+        //echo $respuesta;
+        //echo "<script>console.log('aa')</script>";
+    }
 }

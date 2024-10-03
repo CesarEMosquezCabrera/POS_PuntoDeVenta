@@ -111,4 +111,10 @@ class ControladorUsuario{
         $respuesta=ModeloUsuario::mdlEliUsuario($id);
         echo $respuesta;
     }
+    static public function ctrCantidadUsuarios(): mixed{
+        $respuesta = ModeloUsuario::mdlCantidadUsuarios();
+        return $respuesta;
+        //echo $respuesta;
+        //echo "<script>console.log('aa')</script>";
+    }
 }

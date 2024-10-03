@@ -100,4 +100,10 @@ class ControladorFactura{
         $respuesta=ModeloFactura::mdlRegistrarFactura($data);
         echo $respuesta;
     }
+    static public function ctrCantidadVentas(){
+        $respuesta = ModeloFactura::mdlCantidadVentas();
+        return $respuesta;
+        //echo $respuesta;
+        //echo "<script>console.log('aa')</script>";
+    }
 }

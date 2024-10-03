@@ -139,4 +139,11 @@ class ControladorProducto{
         //echo $respuesta;
         //echo "<script>console.log('aa')</script>";
     }
+
+    static public function ctrCantidadProductos(){
+        $respuesta = ModeloProducto::mdlCantidadProductos();
+        return $respuesta;
+        //echo $respuesta;
+        //echo "<script>console.log('aa')</script>";
+    }
 }

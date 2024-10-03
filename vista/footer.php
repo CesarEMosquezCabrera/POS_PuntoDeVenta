@@ -45,6 +45,10 @@
 <script src="assest/js/cliente.js"></script>
 <script src="assest/js/producto.js"></script>
 <script src="assest/js/factura.js"></script>
+<script src="assest/js/reporte.js"></script>
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<!-- <script src="assest/dist/js/pages/dashboard.js"></script> -->
 
 <!-- MODALS -->
 <div class="modal fade" id="modal-warning">
